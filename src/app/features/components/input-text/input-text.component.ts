@@ -24,8 +24,9 @@ import Underline from '@editorjs/underline';
 export class InputTextComponent implements AfterViewInit {
   @Input() title: string = 'param'
   @Input() type: string = 'text'
-  @Input() textData: any = {}
+  @Input() textData: any = ''
   @Output() outputTextData = new EventEmitter<any>();
+  isLoaded: boolean = false;
 
 
   // @ts-ignore
@@ -37,7 +38,17 @@ export class InputTextComponent implements AfterViewInit {
   constructor() {}
 
   ngAfterViewInit(): void {
-    this.initializeEditor();
+    this.checkInitialize()
+  }
+
+  checkInitialize() {
+    setTimeout(()=>{
+      if(!this.textData.length && Object.keys(JSON.parse(this.textData)).length === 0) {
+        this.checkInitialize()
+      } else {
+        this.initializeEditor();
+      }
+    },500)
   }
 
   handler() {
@@ -48,7 +59,7 @@ export class InputTextComponent implements AfterViewInit {
     this.editor = new EditorJS({
       minHeight: 200,
       holder: this.editorElement.nativeElement,
-      data: this.textData,
+      data: JSON.parse(this.textData),
       tools: {
         // ...
         underline: Underline

@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['../../app.component.css', './create-document.component.css']
 })
 export class CreateDocumentComponent implements OnInit{
-  textData: any = {}
+  textData: any = "{\"0\": \"0\"}"
   @Input() image: File = new File([], '', undefined)
 
   constructor() {}

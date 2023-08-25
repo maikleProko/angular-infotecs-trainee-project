@@ -1,6 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {RoutesEnum, StorageService} from "../../core";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'edit-document',
@@ -16,28 +17,40 @@ export class EditDocumentComponent implements OnInit, OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private storage: StorageService,
+    private ref: ChangeDetectorRef
   ) {}
+
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe(params => {
       //alert(JSON.stringify(params))
       this.id = params['id'];
-      /*
-      let document = StorageService.get(this.id)
-      if(document == null) {
-        this.router.navigate([RoutesEnum.Home]);
-      } else {
-        this.textData = document.textData;
-        this.date = document.date;
-        this.image = document.image
-      }*/
-    });
+      this.storage.get(this.id, (document: any) => {
+        if(document == null) {
+          this.router.navigate([RoutesEnum.Home]);
+        } else {
+          this.textData = JSON.stringify(document.textData);
+          this.date = document.date;
+          this.image = new File([], 'no-changed', undefined)
+          console.log(document)
+          this.ref.markForCheck();
+        }
+      });
+    })
+
   }
 
   getTextData(textData: string) {
     if(textData) {
       this.textData = JSON.stringify(textData)
+    }
+  }
+
+  getImage(image: File) {
+    if(image) {
+      this.image = image
     }
   }
 

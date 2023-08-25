@@ -13,14 +13,18 @@ export class EditDocumentButtonComponent {
   @Input() id: number = -1
   @Input() textData: any = {}
   @Input() date: string = ''
+  @Input() image: File = new File([], 'no-changed', undefined)
 
   constructor(
-    private router: Router
+    private router: Router,
+    private storage: StorageService
   ) {}
 
   onClick(): any {
+    this.storage.set(this.id, this.textData, this.image, () => {
+      this.router.navigate([RoutesEnum.Home]);
+    })
     //StorageService.set(this.id, this.textData)
-    this.router.navigate([RoutesEnum.Home]);
   }
 
 }

@@ -20,7 +20,6 @@ export class CreateDocumentButtonComponent {
   ) {}
 
   onClick(): any {
-    console.log(this.image)
     //StorageService.push(this.textData)
     this.storage.push(this.textData, this.image, () => {
       this.router.navigate([RoutesEnum.Home]);

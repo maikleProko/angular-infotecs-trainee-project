@@ -6,7 +6,7 @@
   </div>
   <p class="description">For create a document, fill in the fields below</p>
 
-  <input-text title="Text" type='text' (outputTextData)="getTextData($event)" ></input-text>
+  <input-text title="Text" type='text' [textData]="this.textData" (outputTextData)="getTextData($event)" ></input-text>
   <input-image title="Image" (outputImage)="getImage($event)"></input-image>
 
   <create-document-button

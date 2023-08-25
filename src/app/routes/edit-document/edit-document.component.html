@@ -7,10 +7,13 @@
   <p class="description">For edit a document, fill in the fields below</p>
 
   <input-text title="Text" type='text' [textData]=this.textData (outputTextData)="getTextData($event)" ></input-text>
-  <input-image title="Image" (change)="this.image=$any($event.target).value"></input-image>
+  <input-image title="Image" (outputImage)="getImage($event)"></input-image>
 
   <edit-document-button
-    [id]=this.id textData={{this.textData}}></edit-document-button>
+    [id]=this.id
+    [textData]=this.textData
+    [image]="this.image"
+  ></edit-document-button>
 
 </div>
 

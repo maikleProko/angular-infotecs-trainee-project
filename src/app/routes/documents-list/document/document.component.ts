@@ -1,4 +1,13 @@
-import {Component, ChangeDetectionStrategy, OnDestroy, NgModule, Input, Output, EventEmitter} from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnDestroy,
+  NgModule,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit
+} from '@angular/core';
 import {BrowserModule} from "@angular/platform-browser";
 import {DeleteButtonComponent} from "./delete-button";
 
@@ -31,7 +40,5 @@ export class DocumentComponent {
 
 
   constructor() {}
-
-
 
 }

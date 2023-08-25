@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {StorageService} from "../../core";
 
@@ -8,14 +8,16 @@ import {StorageService} from "../../core";
   styleUrls: ['../../app.component.css', './documents-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DocumentsListComponent implements OnInit{
+export class DocumentsListComponent implements OnInit {
   public documents: any[] = []
   private maxCount: number = 4
   public count: number = this.maxCount
+  outputEventUpdate = new EventEmitter<any>();
 
   constructor(
     private router: Router,
-    private storage: StorageService
+    private storage: StorageService,
+    private ref: ChangeDetectorRef
   ) {}
 
   getDocumentsByCount(count: number, documents: any[]) {
@@ -32,11 +34,12 @@ export class DocumentsListComponent implements OnInit{
   }
 
   updateDocuments() {
-    this.storage.getDocuments((documents: any) => {
+    this.documents = []
+    this.storage.getDocuments((documents: any[]) => {
       this.documents = documents
-      console.log(documents)
+      console.log(this.documents)
+      this.ref.markForCheck();
     })
-     //this.getDocumentsByCount(this.count, StorageService.getDocuments())
   }
 
   ngOnInit(): void {

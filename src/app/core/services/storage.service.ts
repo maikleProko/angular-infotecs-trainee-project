@@ -21,48 +21,48 @@ export class StorageService {
 
 
   uploadImage(image: any, title: string, handler: any) {
-    const path = `images/${this.userName}/${title}`;
-    const ref = this.storage.ref(path);
+    if(image) {
+      if(image.name == 'no-changed') {
+        this.get(Number(title), (document: any)=>{
+          handler(document.image)
+        })
+      }
+      else {
+        const path = `images/${this.userName}/${title}`;
+        const ref = this.storage.ref(path);
 
-    const task = this.storage.upload(path, image);
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          let downloadURL = ref.getDownloadURL();
-          downloadURL.subscribe((url: string) => {
+        const task = this.storage.upload(path, image);
+        task
+          .snapshotChanges()
+          .pipe(
+            finalize(() => {
+              let downloadURL = ref.getDownloadURL();
+              downloadURL.subscribe((url: string) => {
+                if (url) {
+                  handler(url)
+                  console.log(url);
+                }
+              });
+            })
+          )
+          // @ts-ignore
+          .subscribe((url: string) => {
             if (url) {
               console.log(url);
-              handler()
             }
           });
-        })
-      )
-      // @ts-ignore
-      .subscribe((url: string) => {
-        if (url) {
-          console.log(url);
-        }
-      });
+      }
+    }
+    else {
+      handler('')
+    }
+
   }
 
   push(textData: any, image: any, handler: any): any{
     this.getDocuments((documents: any)=>{
-      let document: Document = {
-        id: this.getAvailableId(documents),
-        date: this.formatDate(new Date()),
-        textData: JSON.parse(textData)
-      }
-
-      this.db.object<Document>('/users/' + this.userName + '/documents/' + document.id)
-        .update(document)
-        .then(()=>{
-          if(image) {
-            this.uploadImage(image, document.id.toString(), () => {
-              handler()
-            })
-          }
-        })
+      let id: number = this.getAvailableId(documents)
+      this.set(id, textData, image, handler)
     })
   }
 
@@ -72,39 +72,41 @@ export class StorageService {
 
   getDocuments(handler: any) {
     let ref = this.db.database.ref('/users/' + this.userName + '/documents/')
-    ref.on('value', (snapshot) => {
+    ref.get().then((snapshot)=>{
       let documents: any[] = []
       for(const key in snapshot.val()) {
         documents.push(snapshot.val()[key])
       }
       handler(documents)
     })
+
   }
 
   get(id: number, handler: any) {
     let ref = this.db.database.ref('/users/' + this.userName + '/documents/' + id)
-    ref.on('value', (document) => {
-      handler(document)
+    ref.get().then((document)=> {
+      handler(document.val())
     })
   }
 
-  set(id: number, textData: any, image: any, handler: any) {
+  set(id: number, textData: any, inputImage: any, handler: any) {
+    this.uploadImage(inputImage, id.toString(), (image: any) => {
 
-    let document: Document = {
-      id: id,
-      date: this.formatDate(new Date()),
-      textData: JSON.parse(textData)
-    }
+      let document: Document = {
+        id: id,
+        date: this.formatDate(new Date()),
+        textData: JSON.parse(textData),
+        image: image
+      }
+      console.log("updated-document", document)
 
-    this.db.object<Document>('/users/' + this.userName + '/documents/' + document.id)
-      .update(document)
-      .then(()=>{
-        if(image) {
-          this.uploadImage(image, document.id.toString(), () => {
-            handler()
-          })
-        }
-      })
+      this.db.object<Document>('/users/' + this.userName + '/documents/' + document.id)
+        .update(document)
+        .then(()=>{
+          handler()
+        })
+    })
+
   }
 
 
@@ -125,10 +127,6 @@ export class StorageService {
     return id
   }
 
-
-  private updateDocuments(documents: any[]) {
-    localStorage.setItem('documents', JSON.stringify(this.getSortedDocumentsByDate(documents)));
-  }
 
 
   private getSortedDocumentsByDate(documents: any[]): any[] {
