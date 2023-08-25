@@ -1,0 +1,14 @@
+:host {
+  width: 160px;
+  height: 154px;
+  left: 1008px;
+  top: 19px;
+  position: absolute;
+  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.image {
+  width: 160px;
+  height: 154px;
+}

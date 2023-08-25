@@ -102,5 +102,8 @@
       }
     }
   },
-  "defaultProject": "angular-infotecs-trainee-project"
+  "defaultProject": "angular-infotecs-trainee-project",
+  "cli": {
+    "analytics": false
+  }
 }

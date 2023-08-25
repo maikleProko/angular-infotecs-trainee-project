@@ -1,0 +1,15 @@
+<p class="title">{{this.title}}</p>
+<div class='background' aria-disabled="false">
+  <div>
+    <img src="../../../../assets/images/upload.svg" />
+    <div class="select-a-file">
+      <p class="select-a-file-text">Select a file</p>
+      <p>or drag it here</p>
+    </div>
+  </div>
+  <input
+    type="file"
+    accept='.jpg, .png'
+    (change)="onChange($event)"
+  />
+</div>

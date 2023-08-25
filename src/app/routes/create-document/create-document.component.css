@@ -1,0 +1,47 @@
+:host {
+
+}
+
+.divider {
+  width: 300px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5px;
+}
+
+.line {
+  position: absolute;
+  width: 50px;
+  height: 1px;
+  background: rgb(101, 109, 119);
+}
+
+.header {
+  padding-top: 30px;
+  font-size: 25px;
+}
+
+.description {
+  color: rgb(101, 109, 119);
+}
+
+.canvas {
+  width: 800px;
+  padding-top: 16px;
+  padding-bottom: 14px;
+  background: white;
+  border-radius: 50px;
+  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.15);
+  display: flex;
+  margin: 82px auto 32px;
+  max-width: 960px;
+  flex-direction: column;
+  align-items: center;
+}
+
+create-document-button {
+  padding-top: 8px;
+}
+

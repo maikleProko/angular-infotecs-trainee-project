@@ -1,0 +1,37 @@
+input {
+  width: 270px;
+  height: 35px;
+  border-color: rgb(208, 215, 222);
+  border-radius: 10px;
+  resize: none;
+  border-style: solid;
+}
+
+*:focus {
+  outline: none;
+}
+
+.title {
+  color: black;
+  font-weight: 500;
+  padding-top: 30px;
+  padding-bottom: 5px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.field {
+  padding-top: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 600px;
+  min-height: 120px;
+  border-width: 2px;
+  border-color: rgb(208, 215, 222);
+  border-style: solid;
+  border-radius: 10px;
+  cursor: text;
+}

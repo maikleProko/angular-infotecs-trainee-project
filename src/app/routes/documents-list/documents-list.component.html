@@ -1,0 +1,24 @@
+
+<div class="content" role="main">
+  <div class="background-create-button">
+    <create-button></create-button>
+  </div>
+
+  <document *ngFor="let document of documents; let order = index"
+            [id] = document.id
+            [date] = document.date
+            [textData] = document.textData
+            [image] = document.image
+            (outputEventUpdate)="updateDocuments()"
+            [order]="order"
+            [count]="this.count"
+            (outputEventScroll)="updateDocumentsCount()"
+  ></document>
+
+
+
+
+
+</div>
+
+

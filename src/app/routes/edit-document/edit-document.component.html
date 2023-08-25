@@ -1,0 +1,18 @@
+
+<div class="canvas">
+  <h2 class="header">Edit {{this.date}}</h2>
+  <div class="divider">
+    <div class="line"></div>
+  </div>
+  <p class="description">For edit a document, fill in the fields below</p>
+
+  <input-text title="Text" type='text' [textData]=this.textData (outputTextData)="getTextData($event)" ></input-text>
+  <input-image title="Image" (change)="this.image=$any($event.target).value"></input-image>
+
+  <edit-document-button
+    [id]=this.id textData={{this.textData}}></edit-document-button>
+
+</div>
+
+
+

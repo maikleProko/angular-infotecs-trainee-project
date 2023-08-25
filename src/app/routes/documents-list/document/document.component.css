@@ -1,0 +1,35 @@
+:host {
+  width: 2000px;
+}
+
+.document {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  padding-left: 32px;
+  padding-bottom: 20px;
+  width: 1186px;
+  min-height: 192px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.absolute-canvas {
+  position: relative;
+}
+
+.buttons-canvas {
+  margin-left: 535px;
+}
+
+.date {
+  position: absolute;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  left: 28px;
+  top: 28px
+}
+

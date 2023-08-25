@@ -1,0 +1,58 @@
+input {
+  border-color: rgb(208, 215, 222);
+  border-radius: 10px;
+  resize: none;
+  border-style: solid;
+  position: absolute;
+  inset: 0px;
+  opacity: 0;
+  margin-bottom:0;
+}
+
+*:focus {
+  outline: none;
+}
+
+.title {
+  color: black;
+  font-weight: 500;
+  padding-top: 30px;
+  padding-bottom: 5px;
+}
+
+.select-a-file-text {
+  color:#1B96FF;
+}
+
+.select-a-file{
+  display:flex;
+  gap:3px;
+  justify-content: center;
+
+}
+
+.select-a-file p{
+  margin: 10px 0;
+}
+
+.background{
+  width: 620px;
+  height: 150px;
+  position: relative;
+  border-width: 2px;
+  border-style: dashed;
+  border-radius: 5px;
+  text-align: center;
+  background: white;
+  border-color: rgb(208, 215, 222);
+}
+.background img{
+  margin-top:40px;
+}
+.background:hover{
+  cursor: pointer;
+}
+
+input:hover{
+  cursor: pointer;
+}

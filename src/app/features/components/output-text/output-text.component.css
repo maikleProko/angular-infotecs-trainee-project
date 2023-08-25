@@ -1,0 +1,23 @@
+
+.background {
+  width: 953px;
+  min-height: 81px;
+  left: 27px;
+  top: 82px;
+  border-radius: 10px;
+  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.15);
+  border: none;
+  text-align: left;
+  padding-left:10px;
+  padding-top:10px;
+  resize: none;
+}
+
+.textData {
+  font-family: monospace;
+  padding: 2px;
+}
+
+*:focus {
+  outline: none;
+}

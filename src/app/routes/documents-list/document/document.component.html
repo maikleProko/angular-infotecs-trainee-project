@@ -1,0 +1,29 @@
+<div (mouseenter)="emitScroll()">
+
+  <div class="document">
+    <div class="canvas">
+
+    </div>
+
+    <p class="date">{{this.date}}</p>
+    <div class="buttons-canvas">
+      <edit-button [id]=this.id></edit-button>
+      <delete-button [id]=this.id (outputEventDelete)="emitUpdate()"></delete-button>
+      <output-image [image]=this.image></output-image>
+    </div>
+
+    <div class="absolute-canvas">
+      <output-text [textData]=this.textData></output-text>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+
+<div class="canvas">
+  <h2 class="header">Create document</h2>
+  <div class="divider">
+    <div class="line"></div>
+  </div>
+  <p class="description">For create a document, fill in the fields below</p>
+
+  <input-text title="Text" type='text' (outputTextData)="getTextData($event)" ></input-text>
+  <input-image title="Image" (outputImage)="getImage($event)"></input-image>
+
+  <create-document-button
+    textData={{this.textData}}
+    image={{this.image}}
+  ></create-document-button>
+
+</div>
+
+
+
