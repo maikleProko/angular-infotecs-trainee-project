@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {RoutesEnum, StorageService} from "../../core";
-import {templateJitUrl} from "@angular/compiler";
 
 @Component({
   selector: 'edit-document',
@@ -24,6 +23,7 @@ export class EditDocumentComponent implements OnInit, OnDestroy {
     this.sub = this.activatedRoute.params.subscribe(params => {
       //alert(JSON.stringify(params))
       this.id = params['id'];
+      /*
       let document = StorageService.get(this.id)
       if(document == null) {
         this.router.navigate([RoutesEnum.Home]);
@@ -31,7 +31,7 @@ export class EditDocumentComponent implements OnInit, OnDestroy {
         this.textData = document.textData;
         this.date = document.date;
         this.image = document.image
-      }
+      }*/
     });
   }
 

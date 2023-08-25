@@ -14,7 +14,8 @@ export class DocumentsListComponent implements OnInit{
   public count: number = this.maxCount
 
   constructor(
-    private router: Router
+    private router: Router,
+    private storage: StorageService
   ) {}
 
   getDocumentsByCount(count: number, documents: any[]) {
@@ -31,7 +32,11 @@ export class DocumentsListComponent implements OnInit{
   }
 
   updateDocuments() {
-    this.documents = this.getDocumentsByCount(this.count, StorageService.getDocuments())
+    this.storage.getDocuments((documents: any) => {
+      this.documents = documents
+      console.log(documents)
+    })
+     //this.getDocumentsByCount(this.count, StorageService.getDocuments())
   }
 
   ngOnInit(): void {

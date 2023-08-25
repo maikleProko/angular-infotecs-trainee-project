@@ -3,8 +3,6 @@ import { Router } from "@angular/router";
 import {RoutesEnum} from "../../../core";
 import {StorageService} from "../../../core";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
-import firebase from "firebase/compat/app";
-import storage = firebase.storage;
 
 @Component({
   selector: 'create-document-button',
@@ -14,17 +12,19 @@ import storage = firebase.storage;
 export class CreateDocumentButtonComponent {
   title: string = 'Create'
   @Input() textData: any = {}
-  @Input() image: any = null
+  @Input() image: File = new File([], '', undefined)
 
   constructor(
     private router: Router,
-    private storage: AngularFireStorage
+    private storage: StorageService
   ) {}
 
   onClick(): any {
+    console.log(this.image)
     //StorageService.push(this.textData)
-    StorageService.pushTestImage(this.image, storage);
-    //this.router.navigate([RoutesEnum.Home]);
+    this.storage.push(this.textData, this.image, () => {
+      this.router.navigate([RoutesEnum.Home]);
+    })
   }
 
 }

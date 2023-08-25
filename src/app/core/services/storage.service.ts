@@ -2,32 +2,29 @@ import { Injectable } from '@angular/core';
 import {formatDate} from "@angular/common";
 import { Document } from "../interfaces";
 import {finalize} from "rxjs";
+import { AngularFireStorage } from "@angular/fire/compat/storage";
+import {AngularFireDatabase} from "@angular/fire/compat/database";
 
 @Injectable({
   providedIn: 'root'
 })
 
-export abstract class StorageService {
+export class StorageService {
 
-  public static pushFire(textData: any, image: any): any{
-    let documents = this.getDocuments()
-    let document: Document = {
-      id: this.getAvailableId(documents),
-      date: this.formatDate(new Date()),
-      textData: JSON.parse(textData),
-      image: null
-    }
-    documents.push(document)
+  private userName: string = 'user'
 
-    this.updateDocuments(documents)
-  }
 
-  public static pushTestImage(image: any, storage: any) {
-    var n = Date.now();
-    const path = `RoomsImages/${n}`;
-    const ref = storage.ref(path);
+  constructor(
+    private storage: AngularFireStorage,
+    private db: AngularFireDatabase
+  ) {}
 
-    const task = storage.upload(`RoomsImages/${n}`, image);
+
+  uploadImage(image: any, title: string, handler: any) {
+    const path = `images/${this.userName}/${title}`;
+    const ref = this.storage.ref(path);
+
+    const task = this.storage.upload(path, image);
     task
       .snapshotChanges()
       .pipe(
@@ -36,10 +33,12 @@ export abstract class StorageService {
           downloadURL.subscribe((url: string) => {
             if (url) {
               console.log(url);
+              handler()
             }
           });
         })
       )
+      // @ts-ignore
       .subscribe((url: string) => {
         if (url) {
           console.log(url);
@@ -47,62 +46,69 @@ export abstract class StorageService {
       });
   }
 
-
-  public static push(textData: any): any{
-    let documents = this.getDocuments()
-    let document: Document = {
-      id: this.getAvailableId(documents),
-      date: this.formatDate(new Date()),
-      textData: JSON.parse(textData),
-      image: null
-    }
-    documents.push(document)
-
-    this.updateDocuments(documents)
-  }
-
-  public static remove(id: number): any {
-    let documents = this.getDocuments().filter((document: any) => document.id !== id);
-    this.updateDocuments(documents)
-  }
-
-  public static getDocuments() {
-    let documentsJSON: string | null = localStorage.getItem('documents');
-    let documents: Document[] = []
-    if(documentsJSON != null) {
-      documents = JSON.parse(documentsJSON)
-      return documents
-    } else {
-      localStorage.setItem('documents', JSON.stringify(documents));
-      return []
-    }
-  }
-
-  public static get(id: number) {
-    let documents = this.getDocuments()
-    for(let document of documents) {
-      if(document.id == id) {
-        return document
-      }
-    }
-    return null
-  }
-
-  public static set(id: number, textData: any) {
-    let documents = this.getDocuments().map((document: any) => document.id == id ?
-      {
-        id: id,
+  push(textData: any, image: any, handler: any): any{
+    this.getDocuments((documents: any)=>{
+      let document: Document = {
+        id: this.getAvailableId(documents),
         date: this.formatDate(new Date()),
-        textData: JSON.parse(textData),
-        image: document.image
+        textData: JSON.parse(textData)
       }
-      : document
-    )
-    this.updateDocuments(documents)
+
+      this.db.object<Document>('/users/' + this.userName + '/documents/' + document.id)
+        .update(document)
+        .then(()=>{
+          if(image) {
+            this.uploadImage(image, document.id.toString(), () => {
+              handler()
+            })
+          }
+        })
+    })
+  }
+
+  remove(id: number): any {
+    this.db.object<Document>('/users/' + this.userName + '/documents/' + id).remove()
+  }
+
+  getDocuments(handler: any) {
+    let ref = this.db.database.ref('/users/' + this.userName + '/documents/')
+    ref.on('value', (snapshot) => {
+      let documents: any[] = []
+      for(const key in snapshot.val()) {
+        documents.push(snapshot.val()[key])
+      }
+      handler(documents)
+    })
+  }
+
+  get(id: number, handler: any) {
+    let ref = this.db.database.ref('/users/' + this.userName + '/documents/' + id)
+    ref.on('value', (document) => {
+      handler(document)
+    })
+  }
+
+  set(id: number, textData: any, image: any, handler: any) {
+
+    let document: Document = {
+      id: id,
+      date: this.formatDate(new Date()),
+      textData: JSON.parse(textData)
+    }
+
+    this.db.object<Document>('/users/' + this.userName + '/documents/' + document.id)
+      .update(document)
+      .then(()=>{
+        if(image) {
+          this.uploadImage(image, document.id.toString(), () => {
+            handler()
+          })
+        }
+      })
   }
 
 
-  private static isExistDocumentById(id: number, documents: any[]) {
+  private isExistDocumentById(id: number, documents: any[]) {
     for(let document of documents) {
       if(document.id == id) {
         return true
@@ -111,7 +117,7 @@ export abstract class StorageService {
     return false
   }
 
-  private static getAvailableId(documents: any[]) {
+  private getAvailableId(documents: any[]) {
     let id = 0;
     while(this.isExistDocumentById(id, documents)) {
       id++
@@ -120,12 +126,12 @@ export abstract class StorageService {
   }
 
 
-  private static updateDocuments(documents: any[]) {
+  private updateDocuments(documents: any[]) {
     localStorage.setItem('documents', JSON.stringify(this.getSortedDocumentsByDate(documents)));
   }
 
 
-  private static getSortedDocumentsByDate(documents: any[]): any[] {
+  private getSortedDocumentsByDate(documents: any[]): any[] {
     return documents.sort((a, b) => {
       const dateA = this.parseDateFromString(a.date);
       const dateB = this.parseDateFromString(b.date);
@@ -133,14 +139,14 @@ export abstract class StorageService {
     });
   }
 
-  private static parseDateFromString(dateString: string): Date {
+  private parseDateFromString(dateString: string): Date {
     const [time, date] = dateString.split(' ');
     const [hours, minutes, seconds] = time.split(':');
     const [day, month, year] = date.split('.');
     return new Date(Number(year), Number(month) - 1, Number(day), Number(hours), Number(minutes), Number(seconds));
   }
 
-  private static formatDate(date: Date): string {
+  private formatDate(date: Date): string {
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const seconds = String(date.getSeconds()).padStart(2, '0');
@@ -150,4 +156,9 @@ export abstract class StorageService {
 
     return `${hours}:${minutes}:${seconds} ${day}.${month}.${year}`;
   }
+
+  public setUserName(userName: string) {
+    this.userName = userName
+  }
+
 }

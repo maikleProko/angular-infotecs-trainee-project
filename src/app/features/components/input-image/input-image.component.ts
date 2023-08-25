@@ -1,4 +1,5 @@
 import {Component, ChangeDetectionStrategy, OnDestroy, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {combineChange} from "@angular/fire/compat/firestore";
 
 @Component({
   selector: 'input-image',
@@ -16,6 +17,7 @@ export class InputImageComponent {
 
   onChange(event: any) {
     this.image = event.target.files[0]
+    console.log(this.image)
     this.outputImage.emit(this.image)
   }
 }

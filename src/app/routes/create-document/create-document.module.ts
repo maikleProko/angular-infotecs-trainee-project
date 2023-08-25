@@ -13,6 +13,7 @@ import {
 import {ReactiveFormsModule} from "@angular/forms";
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../../../environments/environment";
+import {StorageService} from "../../core";
 
 @NgModule({
   declarations: [
@@ -23,10 +24,9 @@ import {environment} from "../../../environments/environment";
     BrowserModule,
     FeaturesModule,
     AngularFireStorageModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [StorageService],
   bootstrap: [CreateDocumentComponent]
 })
 export class CreateDocumentModule { }

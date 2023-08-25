@@ -19,7 +19,7 @@ export class EditDocumentButtonComponent {
   ) {}
 
   onClick(): any {
-    StorageService.set(this.id, this.textData)
+    //StorageService.set(this.id, this.textData)
     this.router.navigate([RoutesEnum.Home]);
   }
 

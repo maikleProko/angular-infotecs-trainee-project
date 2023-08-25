@@ -19,7 +19,7 @@ export class DeleteButtonComponent {
   }
 
   public onClick(): void {
-    StorageService.remove(this.id)
+    //StorageService.remove(this.id)
     this.emitDelete()
   }
 
