@@ -1,27 +1,48 @@
-# AngularInfotecsTraineeProject
+# Тестовое задание для стажера на позицию «Web – разработчик (Angular)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.2.
+Этот проект был создан с помощью [Angular CLI](https://github.com/angular/angular-cli ) версия 13.0.2.
 
-## Development server
+## Описание приложения
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+• Приложение реализовано с помощью Angular CLI.
+• Главное окно приложения отображает список записей дневника
+• Записи должны включают в себя форматированный текст (курсивный, жирный, подчеркнутый). 
+• Реализована возможность добавления, редактирования и удаления записей.
+• Записи выводятся в хронологическом порядке, от самой свежей к более поздним.
+• Имеется возможность прикрепления изображений.
+• Реализованы операции редактирования и создания по отдельному URL (к примеру, http://<host>/edit) с использованием Angular routes.
+• Реализован вывод записей с использованием бесконечной прокрутки (Lazy Loading)
+• Для хранения данных (базы данных и изображений) используется firebase
+• Приложение развёрнуто по адресу: `https://infotecs-trainee-project.web.app/`
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Инструкция по локальному запуску
 
-## Build
+Выполните следующие действия для того, чтобы развернуть приложение локально:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+yarn install
+ng serve
+```
 
-## Running unit tests
+Приложение будет развёрнуто по адресу: `http://localhost:4200/`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Инструкция по запуску с помощью Firebase
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Выполните следующие действия для того, чтобы развернуть приложение с помощью Firebase:
 
-## Further help
+```bash
+yarn install
+npm run build
+firebase deploy
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Приложение будет развёрнуто по адресу: `https://infotecs-trainee-project.web.app/`
+
+
+
+
+
+
+
