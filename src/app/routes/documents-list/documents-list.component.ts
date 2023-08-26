@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 import {StorageService} from "../../core";
+import {count} from "rxjs";
 
 @Component({
   selector: 'documents-list',
@@ -34,9 +35,8 @@ export class DocumentsListComponent implements OnInit {
   }
 
   updateDocuments() {
-    this.documents = []
     this.storage.getDocumentsOrderedDate((documents: any[]) => {
-      this.documents = documents
+      this.documents = this.getDocumentsByCount(this.count, documents)
       console.log(this.documents)
       this.ref.markForCheck();
     })
