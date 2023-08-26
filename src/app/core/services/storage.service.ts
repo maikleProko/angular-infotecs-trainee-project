@@ -79,7 +79,12 @@ export class StorageService {
       }
       handler(documents)
     })
+  }
 
+  getDocumentsOrderedDate(handler: any) {
+    this.getDocuments((documents: any[])=>{
+      handler(this.getSortedDocumentsByDate(documents))
+    })
   }
 
   get(id: number, handler: any) {

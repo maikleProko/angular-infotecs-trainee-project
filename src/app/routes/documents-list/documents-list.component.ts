@@ -35,7 +35,7 @@ export class DocumentsListComponent implements OnInit {
 
   updateDocuments() {
     this.documents = []
-    this.storage.getDocuments((documents: any[]) => {
+    this.storage.getDocumentsOrderedDate((documents: any[]) => {
       this.documents = documents
       console.log(this.documents)
       this.ref.markForCheck();

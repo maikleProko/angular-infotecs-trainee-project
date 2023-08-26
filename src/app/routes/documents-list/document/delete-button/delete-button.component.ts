@@ -12,6 +12,7 @@ export class DeleteButtonComponent {
   @Output() outputEventDelete = new EventEmitter<any>();
 
   constructor(
+    private storage: StorageService
   ) {}
 
   emitDelete(){
@@ -19,6 +20,7 @@ export class DeleteButtonComponent {
   }
 
   public onClick(): void {
+    this.storage.remove(this.id)
     //StorageService.remove(this.id)
     this.emitDelete()
   }
