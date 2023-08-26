@@ -77,5 +77,4 @@ export class InputTextComponent implements AfterViewInit {
       console.dir(textData);
     })
   }
-
 }

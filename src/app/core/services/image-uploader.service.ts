@@ -12,6 +12,18 @@ export class ImageUploaderService {
     private storage: AngularFireStorage,
   ) {}
 
+  uploadImage(image: any, title: string, getter: any, handler: any) {
+    if(image) {
+      if(image.name == 'no-changed') {
+        this.useCurrentImage(title, getter, handler)
+      } else {
+        this.useNewImage(image, title, getter, handler)
+      }
+    } else {
+      this.useEmptyImage(handler)
+    }
+  }
+
   useCurrentImage(title: string, getter: any, handler: any) {
     getter.get(Number(title), (document: any)=>{
       handler(document.image)
@@ -28,17 +40,4 @@ export class ImageUploaderService {
   useEmptyImage(handler: any) {
     handler('')
   }
-
-  uploadImage(image: any, title: string, getter: any, handler: any) {
-    if(image) {
-      if(image.name == 'no-changed') {
-        this.useCurrentImage(title, getter, handler)
-      } else {
-        this.useNewImage(image, title, getter, handler)
-      }
-    } else {
-      this.useEmptyImage(handler)
-    }
-  }
-
 }

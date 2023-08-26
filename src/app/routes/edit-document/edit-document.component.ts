@@ -56,5 +56,4 @@ export class EditDocumentComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
 }

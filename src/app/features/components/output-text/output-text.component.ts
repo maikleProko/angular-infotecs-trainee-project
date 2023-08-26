@@ -50,5 +50,4 @@ export class OutputTextComponent implements AfterViewInit {
   }
 
   constructor() {}
-
 }

@@ -30,5 +30,4 @@ export class CreateDocumentComponent implements OnInit{
   getFile(): File {
     return this.image
   }
-
 }

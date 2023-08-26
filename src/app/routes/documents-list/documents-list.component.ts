@@ -44,5 +44,4 @@ export class DocumentsListComponent implements OnInit {
   ngOnInit(): void {
     this.updateDocuments()
   }
-
 }
