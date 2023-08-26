@@ -54,7 +54,7 @@ export class StorageService {
 
   getDocumentsOrderedDate(handler: any) {
     this.getDocuments((documents: any[])=>{
-      handler(this.getSortedDocumentsByDate(documents))
+      handler(StorageService.getSortedDocumentsByDate(documents))
     })
   }
 
@@ -86,7 +86,7 @@ export class StorageService {
     return id
   }
 
-  private getSortedDocumentsByDate(documents: any[]): any[] {
+  private static getSortedDocumentsByDate(documents: any[]): any[] {
     return documents.sort((a, b) => {
       const dateA = StorageService.parseDateFromString(a.date);
       const dateB = StorageService.parseDateFromString(b.date);
