@@ -1,5 +1,4 @@
-import {Component, ChangeDetectionStrategy, Input} from '@angular/core';
-import { Router } from "@angular/router";
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'common-button',

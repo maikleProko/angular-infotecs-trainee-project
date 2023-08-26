@@ -1,8 +1,6 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  OnDestroy,
-  OnInit,
   Input,
   AfterViewInit,
   ViewChild,
@@ -65,7 +63,7 @@ export class InputTextComponent implements AfterViewInit {
         underline: Underline
       },
 
-      onChange: (api, event) => {
+      onChange: () => {
         this.editor.save().then(textData => {
           this.textData = textData
           this.handler()

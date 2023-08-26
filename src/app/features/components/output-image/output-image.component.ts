@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy, OnDestroy, Input} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'output-image',

@@ -1,5 +1,4 @@
-import {Component, ChangeDetectionStrategy, OnDestroy, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {combineChange} from "@angular/fire/compat/firestore";
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'input-image',

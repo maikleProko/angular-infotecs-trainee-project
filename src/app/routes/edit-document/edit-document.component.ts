@@ -1,7 +1,6 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {RoutesEnum, StorageService} from "../../core";
-import {Observable} from "rxjs";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+import { RoutesEnum, StorageService } from "../../core";
 
 @Component({
   selector: 'edit-document',

@@ -1,8 +1,6 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  OnDestroy,
-  OnInit,
   Input,
   ViewChild,
   ElementRef,

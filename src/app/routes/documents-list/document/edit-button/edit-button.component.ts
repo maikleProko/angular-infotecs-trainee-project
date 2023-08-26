@@ -1,6 +1,6 @@
-import {Component, ChangeDetectionStrategy, OnDestroy, Input} from '@angular/core';
-import {Router} from "@angular/router";
-import {RoutesEnum} from "../../../../core";
+import { Component, Input } from '@angular/core';
+import { Router } from "@angular/router";
+import { RoutesEnum } from "../../../../core";
 
 @Component({
   selector: 'edit-button',

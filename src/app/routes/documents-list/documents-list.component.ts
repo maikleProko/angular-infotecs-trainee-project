@@ -1,7 +1,6 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Router} from "@angular/router";
-import {StorageService} from "../../core";
-import {count} from "rxjs";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { StorageService } from "../../core";
 
 @Component({
   selector: 'documents-list',
