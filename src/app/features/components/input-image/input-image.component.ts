@@ -15,7 +15,7 @@ export class InputImageComponent {
 
   constructor() {}
 
-  // Загрузка изображения при его вводе
+  // Ввод изображения
   onChange(event: any) {
     this.image = event.target.files[0]
     this.outputImage.emit(this.image)

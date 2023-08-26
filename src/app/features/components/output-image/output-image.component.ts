@@ -15,6 +15,6 @@ export class OutputImageComponent {
   constructor() {}
 
   public onClick(): void {
-    alert('imaged')
+
   }
 }

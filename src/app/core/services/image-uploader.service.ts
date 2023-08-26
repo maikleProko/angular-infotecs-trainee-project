@@ -41,7 +41,7 @@ export class ImageUploaderService {
     })).subscribe();
   }
 
-  // Использоание пустого изображения
+  // Использование пустого изображения
   useEmptyImage(handler: any) {
     handler('')
   }
