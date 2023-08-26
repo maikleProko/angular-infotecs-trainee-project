@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { StorageService } from "../../core";
+import {RoutesEnum, StorageService} from "../../core";
 
 @Component({
   selector: 'documents-list',
@@ -47,6 +47,9 @@ export class DocumentsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.storage.userName == '') {
+      this.router.navigate([RoutesEnum.Authorization]);
+    }
     this.updateDocuments()
   }
 }

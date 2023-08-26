@@ -24,6 +24,9 @@ export class EditDocumentComponent implements OnInit, OnDestroy {
 
   // Получение имеющихся данных записи дневника
   ngOnInit() {
+    if(this.storage.userName == '') {
+      this.router.navigate([RoutesEnum.Authorization]);
+    }
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
       this.storage.get(this.id, (document: any) => {

@@ -11,7 +11,7 @@ import { ImageUploaderService } from "./image-uploader.service";
 // Сервис для хранения данных
 export class StorageService {
 
-  userName: string = 'user'
+  userName: string = ''
 
   constructor(
     private storage: AngularFireStorage,

@@ -1,0 +1,24 @@
+
+<div class="canvas">
+
+  <h2 class="header">Authorization</h2>
+  <div class="divider">
+    <div class="line"></div>
+  </div>
+  <p class="description">For login, fill in the fields below</p>
+
+  <input-string title="Name" type='text' (outputText)="setUserName($event)" ></input-string>
+  <input-string title="Password" type='password' (outputText)="setPassword($event)" ></input-string>
+
+
+  <login-button
+    [userName]="this.userName"
+    [password]="this.password"
+    (load)="this.setLoading()"
+  ></login-button>
+  <rolling [isLoading]="this.isLoading"></rolling>
+
+</div>
+
+
+

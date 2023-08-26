@@ -4,6 +4,7 @@ import { DocumentsListComponent } from "./routes/documents-list";
 import { CreateDocumentComponent } from "./routes/create-document";
 import { RoutesEnum } from "./core/enums/routes.enum";
 import {EditDocumentComponent} from "./routes/edit-document";
+import {AuthorizationComponent} from "./routes/authorization";
 
 const routes: Routes = [
   {
@@ -18,6 +19,9 @@ const routes: Routes = [
   }, {
     path: RoutesEnum.EditDocument + '/:id',
     component: EditDocumentComponent
+  }, {
+    path: RoutesEnum.Authorization,
+    component: AuthorizationComponent
   }
 ];
 
