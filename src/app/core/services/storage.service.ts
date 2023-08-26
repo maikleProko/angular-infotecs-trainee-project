@@ -8,6 +8,7 @@ import { ImageUploaderService } from "./image-uploader.service";
   providedIn: 'root'
 })
 
+// Сервис для хранения данных
 export class StorageService {
 
   userName: string = 'user'
