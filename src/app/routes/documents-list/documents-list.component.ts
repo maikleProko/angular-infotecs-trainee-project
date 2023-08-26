@@ -8,6 +8,8 @@ import { StorageService } from "../../core";
   styleUrls: ['../../app.component.css', './documents-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
+// Компонент списка записей дневника
 export class DocumentsListComponent implements OnInit {
   public documents: any[] = []
   private maxCount: number = 4
@@ -20,6 +22,7 @@ export class DocumentsListComponent implements OnInit {
     private ref: ChangeDetectorRef
   ) {}
 
+  // Получение записей определенного количества
   getDocumentsByCount(count: number, documents: any[]) {
     let arr = []
     for(let i = 0; i < count && i < documents.length; i++) {
@@ -28,11 +31,13 @@ export class DocumentsListComponent implements OnInit {
     return arr
   }
 
+  // Обновление количества отображаемых записей
   updateDocumentsCount() {
     this.count += this.maxCount;
     this.updateDocuments();
   }
 
+  // Обновление записей
   updateDocuments() {
     this.storage.getDocumentsOrderedDate((documents: any[]) => {
       this.documents = this.getDocumentsByCount(this.count, documents)

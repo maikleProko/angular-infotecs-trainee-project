@@ -6,12 +6,14 @@ import { AngularFireStorage } from "@angular/fire/compat/storage";
   providedIn: 'root'
 })
 
+// Сервис для загрузки изображений
 export class ImageUploaderService {
 
   constructor(
     private storage: AngularFireStorage,
   ) {}
 
+  // Загрузка изображений
   uploadImage(image: any, title: string, getter: any, handler: any) {
     if(image) {
       if(image.name == 'no-changed') {
@@ -24,12 +26,14 @@ export class ImageUploaderService {
     }
   }
 
+  // Использование уже существующего изображения
   useCurrentImage(title: string, getter: any, handler: any) {
     getter.get(Number(title), (document: any)=>{
       handler(document.image)
     })
   }
 
+  // Использование нового изображения
   useNewImage(image: any, title: string, getter: any, handler: any) {
     const path = `images/${getter.userName}/${title}`;
     this.storage.upload(path, image).snapshotChanges().pipe( finalize(() => {
@@ -37,6 +41,7 @@ export class ImageUploaderService {
     })).subscribe();
   }
 
+  // Использоание пустого изображения
   useEmptyImage(handler: any) {
     handler('')
   }

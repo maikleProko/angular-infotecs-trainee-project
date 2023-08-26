@@ -8,6 +8,7 @@ import { StorageService } from "../../../core";
   template: '<common-button title={{title}} (click)="onClick()"></common-button>'
 })
 
+// Компонент для кнопки изменения записи
 export class EditDocumentButtonComponent {
   title: string = 'Save'
   @Input() id: number = -1
@@ -20,6 +21,7 @@ export class EditDocumentButtonComponent {
     private storage: StorageService
   ) {}
 
+  // Изменение записи дневника, после чего перенаправление на страницу списка записей дневника
   onClick(): any {
     this.storage.set(this.id, this.textData, this.image, () => {
       this.router.navigate([RoutesEnum.Home]);

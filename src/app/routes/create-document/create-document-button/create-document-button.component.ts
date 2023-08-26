@@ -8,6 +8,7 @@ import { StorageService } from "../../../core";
   template: '<common-button title={{title}} (click)="onClick()"></common-button>'
 })
 
+// Компонент для кнопки создания записи
 export class CreateDocumentButtonComponent {
   title: string = 'Create'
   @Input() textData: any = {}
@@ -18,6 +19,7 @@ export class CreateDocumentButtonComponent {
     private storage: StorageService
   ) {}
 
+  // Создание записи дневника, после чего перенаправление на страницу списка записей дневника
   onClick(): any {
     this.storage.push(this.textData, this.image, () => {
       this.router.navigate([RoutesEnum.Home]);

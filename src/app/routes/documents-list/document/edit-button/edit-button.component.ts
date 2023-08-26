@@ -7,6 +7,7 @@ import { RoutesEnum } from "../../../../core";
   template: '<common-button title={{title}} (click)="onClick()"></common-button>'
 })
 
+// Компонент для кнопки перенаправления на страницу редактирования записи дневника
 export class EditButtonComponent {
   public title: string = 'Edit';
   @Input() id: number = -1;
@@ -15,6 +16,7 @@ export class EditButtonComponent {
     private router: Router
   ) {}
 
+  // Перенаправление на страницу редактирования записи дневника
   public onClick(): void {
     this.router.navigate([RoutesEnum.EditDocument + '/' +this.id]);
   }

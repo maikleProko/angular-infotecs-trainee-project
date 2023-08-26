@@ -15,6 +15,7 @@ import EditorJS from "@editorjs/editorjs";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
+// Компонент вывода текста записи дневника
 export class OutputTextComponent implements AfterViewInit {
   @Input() textData: any = {}
   // @ts-ignore
@@ -24,11 +25,12 @@ export class OutputTextComponent implements AfterViewInit {
   private viewer: EditorJS;
 
   ngAfterViewInit(): void {
-    this.initializeEditor();
+    this.initializeViewer();
     OutputTextComponent.initTextFieldStyle();
   }
 
-  private initializeEditor() {
+  // Инициализация поля вывода текста записи дневника
+  private initializeViewer() {
     this.viewer = new EditorJS({
       minHeight: 81,
       holder: this.viewerElement.nativeElement,
@@ -37,12 +39,14 @@ export class OutputTextComponent implements AfterViewInit {
     });
   }
 
+  // Коррекция стиля поля вывода текста записи дневника
   private static initTextFieldStyle(): void {
     const linkElement = document.createElement('style');
     linkElement.innerText = '.ce-block__content {\n max-width: 953px;\n}'
     document.head.appendChild(linkElement);
   }
 
+  // Вывод объекта текста записи дневника
   showViewerTextData() {
     this.viewer.save().then(textData => {
       console.dir(textData);

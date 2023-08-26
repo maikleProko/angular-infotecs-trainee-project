@@ -7,6 +7,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
+// Компонент вывода изображения записи дневника
 export class OutputImageComponent {
 
   @Input() image: string | undefined = undefined;

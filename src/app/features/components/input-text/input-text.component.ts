@@ -19,6 +19,7 @@ import Underline from '@editorjs/underline';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
+// Компонент ввода текста записи дневника
 export class InputTextComponent implements AfterViewInit {
   @Input() title: string = 'param'
   @Input() type: string = 'text'
@@ -39,6 +40,7 @@ export class InputTextComponent implements AfterViewInit {
     this.checkInitialize()
   }
 
+  // Метод для проверки на пустоту объекта текста каждую секунду до тех пор, пока не придут данные с компонента, уровнем выше
   checkInitialize() {
     setTimeout(()=>{
       if(!this.textData.length && Object.keys(JSON.parse(this.textData)).length === 0) {
@@ -49,10 +51,12 @@ export class InputTextComponent implements AfterViewInit {
     },500)
   }
 
+  // Передача объекта текста компоненту, уровнем выше
   handler() {
     this.outputTextData.emit(this.textData)
   }
 
+  // Инициализация поля ввода текста записи дневника
   private initializeEditor() {
     this.editor = new EditorJS({
       minHeight: 200,
@@ -72,6 +76,7 @@ export class InputTextComponent implements AfterViewInit {
     });
   }
 
+  // Вывод объекта текста записи дневника
   showEditorTextData() {
     this.editor.save().then(textData => {
       console.dir(textData);

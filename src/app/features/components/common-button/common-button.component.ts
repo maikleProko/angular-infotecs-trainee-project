@@ -7,6 +7,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
+// Компонент кнопки
 export class CommonButtonComponent {
   @Input() title: string = 'Button'
 

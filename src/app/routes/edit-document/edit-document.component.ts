@@ -21,10 +21,9 @@ export class EditDocumentComponent implements OnInit, OnDestroy {
     private ref: ChangeDetectorRef
   ) {}
 
-
+  // Получение имеющихся данных записи дневника
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe(params => {
-      //alert(JSON.stringify(params))
       this.id = params['id'];
       this.storage.get(this.id, (document: any) => {
         if(document == null) {
@@ -38,16 +37,17 @@ export class EditDocumentComponent implements OnInit, OnDestroy {
         }
       });
     })
-
   }
 
-  getTextData(textData: string) {
+  // Изменение объекта текста записи дневника с приведением его к строке JSON формата
+  setTextData(textData: string) {
     if(textData) {
       this.textData = JSON.stringify(textData)
     }
   }
 
-  getImage(image: File) {
+  // Изменение изображения
+  setImage(image: File) {
     if(image) {
       this.image = image
     }

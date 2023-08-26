@@ -18,6 +18,7 @@ export class StorageService {
     private db: AngularFireDatabase
   ) {}
 
+  // Добавление новой записи дневника
   push(textData: any, image: any, handler: any): any{
     this.getDocuments((documents: any)=>{
       let id: number = StorageService.getAvailableId(documents)
@@ -25,10 +26,12 @@ export class StorageService {
     })
   }
 
+  // Удаление записи дневника по указанному номеру
   remove(id: number): any {
     this.db.object<Document>('/users/' + this.userName + '/documents/' + id).remove()
   }
 
+  // Изменение записи дневника по указанному номеру
   set(id: number, textData: any, inputImage: any, handler: any) {
     this.imageUploader.uploadImage(inputImage, id.toString(), this, (image: any) => {
       let document: Document = {
@@ -45,6 +48,7 @@ export class StorageService {
     })
   }
 
+  // Получение записи дневника по указанному номеру
   get(id: number, handler: any) {
     let ref = this.db.database.ref('/users/' + this.userName + '/documents/' + id)
     ref.get().then((document)=> {
@@ -52,12 +56,14 @@ export class StorageService {
     })
   }
 
+  // Получение записей дневника, сортированных по времени от самых свежих к более поздним
   getDocumentsOrderedDate(handler: any) {
     this.getDocuments((documents: any[])=>{
       handler(StorageService.getSortedDocumentsByDate(documents))
     })
   }
 
+  // Получение записей дневника
   private getDocuments(handler: any) {
     let ref = this.db.database.ref('/users/' + this.userName + '/documents/')
     ref.get().then((snapshot)=>{
@@ -69,6 +75,7 @@ export class StorageService {
     })
   }
 
+  // Проверка существования записи дневника по указанному номеру
   private static isExistDocumentById(id: number, documents: any[]) {
     for(let document of documents) {
       if(document.id == id) {
@@ -78,6 +85,7 @@ export class StorageService {
     return false
   }
 
+  // Проверка на занятость номера записи
   private static getAvailableId(documents: any[]) {
     let id = 0;
     while(StorageService.isExistDocumentById(id, documents)) {
@@ -86,6 +94,7 @@ export class StorageService {
     return id
   }
 
+  // Сортировка по дате
   private static getSortedDocumentsByDate(documents: any[]): any[] {
     return documents.sort((a, b) => {
       const dateA = StorageService.parseDateFromString(a.date);
@@ -94,6 +103,7 @@ export class StorageService {
     });
   }
 
+  // Получение объекта даты по строке
   private static parseDateFromString(dateString: string): Date {
     const [time, date] = dateString.split(' ');
     const [hours, minutes, seconds] = time.split(':');
@@ -101,6 +111,7 @@ export class StorageService {
     return new Date(Number(year), Number(month) - 1, Number(day), Number(hours), Number(minutes), Number(seconds));
   }
 
+  // Получение строки по входному объекту даты
   private static formatDate(date: Date): string {
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');

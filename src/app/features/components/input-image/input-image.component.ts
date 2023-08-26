@@ -7,6 +7,7 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
+// Компонент ввода изображения записи дневника
 export class InputImageComponent {
   @Input() title: string = 'param'
   image: any = null;
@@ -14,9 +15,9 @@ export class InputImageComponent {
 
   constructor() {}
 
+  // Загрузка изображения при его вводе
   onChange(event: any) {
     this.image = event.target.files[0]
-    console.log(this.image)
     this.outputImage.emit(this.image)
   }
 }

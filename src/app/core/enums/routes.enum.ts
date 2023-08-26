@@ -1,3 +1,4 @@
+// Перечисление используемых отдельных URL
 export enum RoutesEnum {
   Home = '',
   CreateDocument = 'create',
