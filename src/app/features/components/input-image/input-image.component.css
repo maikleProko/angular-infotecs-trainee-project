@@ -4,7 +4,7 @@ input {
   resize: none;
   border-style: solid;
   position: absolute;
-  inset: 0px;
+  inset: 0;
   opacity: 0;
   margin-bottom:0;
 }
@@ -55,4 +55,12 @@ input {
 
 input:hover{
   cursor: pointer;
+}
+
+.before-upload-field {
+
+}
+
+.after-upload-field {
+  margin-top:20px
 }

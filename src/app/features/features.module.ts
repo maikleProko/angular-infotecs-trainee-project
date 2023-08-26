@@ -5,6 +5,7 @@ import { InputImageComponent } from "./components/input-image";
 import { InputTextComponent } from "./components/input-text";
 import { OutputImageComponent } from "./components/output-image";
 import { OutputTextComponent } from "./components/output-text";
+import { RollingComponent } from "./components/rolling";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { OutputTextComponent } from "./components/output-text";
     InputImageComponent,
     InputTextComponent,
     OutputImageComponent,
-    OutputTextComponent
+    OutputTextComponent,
+    RollingComponent
   ],
   imports: [
     BrowserModule
@@ -22,7 +24,8 @@ import { OutputTextComponent } from "./components/output-text";
     InputImageComponent,
     InputTextComponent,
     OutputImageComponent,
-    OutputTextComponent
+    OutputTextComponent,
+    RollingComponent
   ]
 })
 export class FeaturesModule { }

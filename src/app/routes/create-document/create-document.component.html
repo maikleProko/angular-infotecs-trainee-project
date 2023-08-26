@@ -1,5 +1,6 @@
 
 <div class="canvas">
+
   <h2 class="header">Create document</h2>
   <div class="divider">
     <div class="line"></div>
@@ -12,7 +13,9 @@
   <create-document-button
     textData={{this.textData}}
     [image]="this.image"
+    (load)="this.setLoading()"
   ></create-document-button>
+  <rolling [isLoading]="this.isLoading"></rolling>
 
 </div>
 

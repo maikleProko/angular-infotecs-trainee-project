@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { Router } from "@angular/router";
 import { RoutesEnum } from "../../../core";
 import { StorageService } from "../../../core";
@@ -15,6 +15,7 @@ export class EditDocumentButtonComponent {
   @Input() textData: any = {}
   @Input() date: string = ''
   @Input() image: File = new File([], 'no-changed', undefined)
+  @Output() load = new EventEmitter<any>();
 
   constructor(
     private router: Router,
@@ -23,6 +24,7 @@ export class EditDocumentButtonComponent {
 
   // Изменение записи дневника, после чего перенаправление на страницу списка записей дневника
   onClick(): any {
+    this.load.emit();
     this.storage.set(this.id, this.textData, this.image, () => {
       this.router.navigate([RoutesEnum.Home]);
     })

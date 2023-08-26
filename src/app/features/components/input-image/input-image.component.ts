@@ -17,6 +17,8 @@ export class InputImageComponent {
 
   // Ввод изображения
   onChange(event: any) {
+    document.getElementsByClassName('before-upload-field')[0].setAttribute("hidden", "hidden")
+    document.getElementsByClassName('after-upload-field')[0].removeAttribute('hidden')
     this.image = event.target.files[0]
     this.outputImage.emit(this.image)
   }

@@ -13,6 +13,7 @@ export class EditDocumentComponent implements OnInit, OnDestroy {
   date: string = ''
   image: any = null
   private sub: any;
+  isLoading: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -51,6 +52,11 @@ export class EditDocumentComponent implements OnInit, OnDestroy {
     if(image) {
       this.image = image
     }
+  }
+
+  // Изменение статуса загрузки
+  setLoading() {
+    this.isLoading = true
   }
 
   ngOnDestroy() {

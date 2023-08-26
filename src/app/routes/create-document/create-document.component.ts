@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
 export class CreateDocumentComponent {
   textData: any = "{\"0\": \"0\"}"
   @Input() image: File = new File([], '', undefined)
+  isLoading: boolean = false;
 
   constructor() {}
 
@@ -23,5 +24,10 @@ export class CreateDocumentComponent {
     if(image) {
       this.image = image
     }
+  }
+
+  // Изменение статуса загрузки
+  setLoading() {
+    this.isLoading = true
   }
 }

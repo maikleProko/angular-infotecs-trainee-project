@@ -13,7 +13,9 @@
     [id]=this.id
     [textData]=this.textData
     [image]="this.image"
+    (load)="this.setLoading()"
   ></edit-document-button>
+  <rolling [isLoading]="this.isLoading"></rolling>
 
 </div>
 
