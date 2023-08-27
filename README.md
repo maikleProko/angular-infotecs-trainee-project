@@ -30,6 +30,7 @@
 
 • Для хранения данных (базы данных и изображений) используется Firebase
 
+•	Реализована аутентификация и авторизация пользователя
 
 • Приложение развёрнуто по адресу: `https://infotecs-trainee-project.web.app/`
 
@@ -60,7 +61,21 @@ firebase deploy
 Приложение будет развёрнуто по адресу: `https://infotecs-trainee-project.web.app/`
 
 
+## Список имён и паролей пользователей
 
+test-user:
+
+```bash
+Имя пользователя: test-user@gmail.com
+Пароль: 12345678
+```
+
+firebase-user:
+
+```bash
+Имя пользователя: firebase-user@gmail.com
+Пароль: 12345678
+```
 
 
 
