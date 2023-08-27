@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { catchError, from, Observable, throwError } from 'rxjs';
+import { FError } from "../types/";
 
 @Injectable({
   providedIn: 'root'
@@ -13,24 +14,16 @@ export class AuthenticationService {
     private auth: AngularFireAuth
   ) { }
 
+  // Авторизация пользователя
   login(name: string, password: string): Observable<any> {
     console.log(name)
     return from(this.auth.signInWithEmailAndPassword(
       name, password
     )).pipe(
       catchError((error: FError) =>
-        throwError(() => new Error(this.translateFirebaseErrorMessage(error)))
+        throwError(() => new Error(error.message))
       )
     );
   }
-
-  private translateFirebaseErrorMessage({message}: FError) {
-    return message;
-  }
-
 }
 
-type FError = {
-  code: string;
-  message: string
-};
