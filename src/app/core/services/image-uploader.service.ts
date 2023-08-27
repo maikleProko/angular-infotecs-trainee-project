@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { finalize } from "rxjs";
 import { AngularFireStorage } from "@angular/fire/compat/storage";
+import { Document } from "../types";
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class ImageUploaderService {
 
   // Использование уже существующего изображения
   useCurrentImage(title: string, getter: any, handler: any) {
-    getter.get(Number(title), (document: any)=>{
+    getter.get(Number(title), (document: Document)=>{
       handler(document.image)
     })
   }

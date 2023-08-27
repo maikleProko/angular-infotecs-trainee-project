@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { RoutesEnum, StorageService } from "../../core";
+import { Document } from "../../core/types";
 
 @Component({
   selector: 'edit-document',
@@ -29,7 +30,7 @@ export class EditDocumentComponent implements OnInit, OnDestroy {
     }
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
-      this.storage.get(this.id, (document: any) => {
+      this.storage.get(this.id, (document: Document) => {
         if(document == null) {
           this.router.navigate([RoutesEnum.Home]);
         } else {

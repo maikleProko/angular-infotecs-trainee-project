@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import {RoutesEnum, StorageService} from "../../core";
+import { RoutesEnum, StorageService } from "../../core";
+import { Document } from "../../core/types";
 
 @Component({
   selector: 'documents-list',
@@ -11,7 +12,7 @@ import {RoutesEnum, StorageService} from "../../core";
 
 // Компонент списка записей дневника
 export class DocumentsListComponent implements OnInit {
-  public documents: any[] = []
+  public documents: Document[] = []
   private maxCount: number = 4
   public count: number = this.maxCount
   outputEventUpdate = new EventEmitter<any>();
@@ -23,7 +24,7 @@ export class DocumentsListComponent implements OnInit {
   ) {}
 
   // Получение записей определенного количества
-  getDocumentsByCount(count: number, documents: any[]) {
+  getDocumentsByCount(count: number, documents: Document[]) {
     let arr = []
     for(let i = 0; i < count && i < documents.length; i++) {
       arr.push(documents[i])
@@ -39,7 +40,7 @@ export class DocumentsListComponent implements OnInit {
 
   // Обновление записей
   updateDocuments() {
-    this.storage.getDocumentsOrderedDate((documents: any[]) => {
+    this.storage.getDocumentsOrderedDate((documents: Document[]) => {
       this.documents = this.getDocumentsByCount(this.count, documents)
       console.log(this.documents)
       this.ref.markForCheck();
